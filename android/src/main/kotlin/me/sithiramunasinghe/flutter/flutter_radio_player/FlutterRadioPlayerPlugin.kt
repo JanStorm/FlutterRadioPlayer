@@ -261,7 +261,7 @@ class FlutterRadioPlayerPlugin : FlutterPlugin, ActivityAware, MethodChannel.Met
 
                 val mappedSources = mediaSources.map { m -> FRPAudioSource.fromMap(m) }
 
-                frpRadioPlayerService.setMediaSources(mappedSources, true)
+                frpRadioPlayerService.setMediaSources(mappedSources, false)
                 result.success("success")
             }
             "get_playback_state" -> {
