@@ -5,6 +5,7 @@ import me.sithiramunasinghe.flutter.flutter_radio_player.core.data.FRPIcyMetaDat
 import me.sithiramunasinghe.flutter.flutter_radio_player.core.data.FRPVolumeChangeEvent
 
 data class FRPPlayerEvent(
+    val initialized: Boolean? = null,
     val type: String? = null,
     val currentSource: FRPCurrentSource? = null,
     val volumeChangeEvent: FRPVolumeChangeEvent? = null,
