@@ -92,6 +92,9 @@ class FlutterRadioPlayerPlugin : FlutterPlugin, ActivityAware, MethodChannel.Met
             override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
                 Log.i(TAG, "EventChannel sink ok")
                 eventSink = events
+                if (isBound) {
+                    handleFRPEvents(FRPPlayerEvent(initialized = true))
+                }
             }
 
             override fun onCancel(arguments: Any?) {
@@ -114,6 +117,7 @@ class FlutterRadioPlayerPlugin : FlutterPlugin, ActivityAware, MethodChannel.Met
                 frpRadioPlayerService.currentActivity =
                     this@FlutterRadioPlayerPlugin.pluginActivity!!
                 isBound = true
+                handleFRPEvents(FRPPlayerEvent(initialized = true))
             }
 
             override fun onServiceDisconnected(name: ComponentName?) {

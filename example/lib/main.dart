@@ -39,8 +39,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _flutterRadioPlayer.initPlayer();
-    _flutterRadioPlayer.addMediaSources(frpSource);
+    _flutterRadioPlayer.initPlayer().then((value) {
+      _flutterRadioPlayer.addMediaSources(frpSource);
+    });
   }
 
   @override

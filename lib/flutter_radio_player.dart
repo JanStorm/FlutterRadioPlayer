@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -31,7 +33,7 @@ class FlutterRadioPlayer {
   /// This is will init the method channels and event channels that are
   /// necessary for the player to work in a reactive manner.
   /// You Only need to call this method once.
-  void initPlayer() {
+  Future<void> initPlayer() async {
     if (kDebugMode) {
       print("Initialized Event Channels: Started");
     }
@@ -39,6 +41,12 @@ class FlutterRadioPlayer {
         _eventChannel.receiveBroadcastStream().map<String?>((event) => event);
     if (kDebugMode) {
       print("Initialized Event Channels: Completed");
+    }
+
+    if (Platform.isAndroid) {
+      await _eventStream!.firstWhere((event) {
+        return jsonDecode(event!)?['initialized'] == true;
+      });
     }
   }
 

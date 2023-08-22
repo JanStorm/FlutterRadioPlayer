@@ -5,6 +5,9 @@ import me.sithiramunasinghe.flutter.flutter_radio_player.core.data.FRPCurrentSou
 import me.sithiramunasinghe.flutter.flutter_radio_player.core.data.FRPVolumeChangeEvent
 
 data class FRPPlayerEvent(
+    @SerializedName("initialized")
+    val initialized: Boolean? = null,
+
     @SerializedName("type")
     val type: String? = null,
 
