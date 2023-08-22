@@ -33,7 +33,7 @@ class FlutterRadioPlayer {
   /// This is will init the method channels and event channels that are
   /// necessary for the player to work in a reactive manner.
   /// You Only need to call this method once.
-  Future<void> initPlayer() async {
+  void initPlayer() {
     if (kDebugMode) {
       print("Initialized Event Channels: Started");
     }
@@ -42,8 +42,11 @@ class FlutterRadioPlayer {
     if (kDebugMode) {
       print("Initialized Event Channels: Completed");
     }
+  }
 
-    if (Platform.isAndroid) {
+  Future<void> initService() async {
+    String? result = await _methodChannel.invokeMethod<String>("init_service");
+    if (result == "success" && Platform.isAndroid) {
       await _eventStream!.firstWhere((event) {
         return jsonDecode(event!)?['initialized'] == true;
       });

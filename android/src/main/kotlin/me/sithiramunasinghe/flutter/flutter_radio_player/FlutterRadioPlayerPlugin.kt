@@ -158,12 +158,11 @@ class FlutterRadioPlayerPlugin : FlutterPlugin, ActivityAware, MethodChannel.Met
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         when (call.method) {
             "init_service" -> {
-                if (isBound) {
-                    result.error("FRP_001", "Failed to call init_service", null)
-                    throw FRPException("FRPCoreService already been initialized")
+                if (!isBound) {
+                    startFRPService()
+                    result.success("success")
                 }
-                startFRPService()
-                result.success("success")
+                result.success("unchanged")
             }
             "use_icy_data" -> {
                 if (!isBound) {
