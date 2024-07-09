@@ -5,9 +5,12 @@
     <!--  Permissions for the plugin  -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" android:minSdkVersion="34" />
 
     <!--  Services for the plugin  -->
     <application android:usesCleartextTraffic="true" tools:targetApi="m">
-        <service android:name=".core.services.FRPCoreService"/>
+        <service
+            android:name=".core.services.FRPCoreService"
+            android:foregroundServiceType="mediaPlayback" />
     </application>
 </manifest>
